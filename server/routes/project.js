@@ -106,10 +106,8 @@ router.post('/add', (req, res) => {
                     success: true
                 });});
 });
-router.get('/print',  (req, res,next) => {
-  console.log(req.head);
+router.get('/print',  (req, res) => {
 	db.query('SELECT project_name, id_project from Projects_data', function(err, rows, fields) {
-    
     if (!err) {
         	res.send(JSON.stringify(rows));
         } else {
@@ -118,5 +116,14 @@ router.get('/print',  (req, res,next) => {
 	});
 }
 )
-
+router.get('/table',  (req, res) => {
+	db.query('SELECT project_name, id,time_summary from Projects_data', function(err, rows, fields) {
+    if (!err) {
+        	res.send(JSON.stringify(rows));
+        } else {
+			console.log('Error while performing Query.');
+		}
+	});
+}
+)
 module.exports = router;

@@ -15,7 +15,8 @@ const HomePage = ({
   errors,
   start,
   check,
-  stop
+  stop,
+  status
   
 }) => (
  
@@ -50,7 +51,7 @@ containerElement="label" primary/>
      return <div className="cards"  key={i}> 
                 {[
                    // remove the key
-                <Card><CardHeader title= {object.project_name+' '+Cards[i].status} ><div className="buttons"><RaisedButton label="Check Me!"  onClick= {() =>check(i)}/></div>  </CardHeader> </Card> 
+                <Card><CardHeader title= {object.project_name+' '+(status[i]?status[i]:'')} ><div className="buttons"><RaisedButton label="Check Me!"  onClick= {() =>check(i)}/></div>  </CardHeader> </Card> 
                 
                 ]}
             </div>; })}</div>}))}
@@ -74,7 +75,8 @@ HomePage.propTypes = {
   Cards:PropTypes.array.isRequired,
   start:PropTypes.func.isRequired,
   stop:PropTypes.func.isRequired,
-  check:PropTypes.func.isRequired
+  check:PropTypes.func.isRequired,
+  status:PropTypes.array.isRequired
 };
 
 export default HomePage;

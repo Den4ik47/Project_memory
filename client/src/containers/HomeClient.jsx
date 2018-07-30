@@ -15,7 +15,9 @@ class HomeClient extends React.PureComponent {
     projects:[],
     errors: {},
     checked_project:'',
-    iterator:{}
+    iterator:{},
+    status:[
+    ]
       }
    
     this.processForm = this.processForm.bind(this);
@@ -25,12 +27,13 @@ class HomeClient extends React.PureComponent {
     this.Getiterator = this.Getiterator.bind(this);
   }
   Getiterator(i){
+    console.log(this.state.status);
     if(i==this.state.iterator){this.state.checked_project=this.state.projects[i].id_project}
     else{
     this.setState(
       [
        this.state.checked_project=this.state.projects[i].id_project,
-       this.state.projects[i].status=' Ready',
+       this.state.status[i]=' Ready',
        this.state.iterator=i
       ]
     );}
@@ -88,7 +91,7 @@ console.log(xhr.response);
     xhr.addEventListener('load', () => {
         if (xhr.status === 200) {
           this.state.checked_project='';
-          this.setState( [this.state.projects[this.state.iterator].status=xhr.response.message]);
+          this.setState( [this.state.status[this.state.iterator]=xhr.response.message]);
         console.log(xhr.response);
       } else {
         const errors = xhr.response.errors ? xhr.response.errors : {};
@@ -120,7 +123,7 @@ console.log(xhr.response);
     xhr.addEventListener('load', () => {
         if (xhr.status === 200) {
           this.state.checked_project='';
-          this.setState([this.state.projects[this.state.iterator].status=xhr.response.message]);
+          this.setState([this.state.status[this.state.iterator]=xhr.response.message]);
         console.log(xhr.response);
       } else {
         const errors = xhr.response.errors ? xhr.response.errors : {};
@@ -144,10 +147,13 @@ console.log(xhr.response);
         project_name
     });
   }
-  componentDidMount() {
+  componentWillMount() {
     fetch('/project/print')
       .then(res => res.json())
       .then(rows => this.setState({projects: rows}, () => console.log("successfully fetched allwatches", rows)))
+      .catch((err) => {
+        console.log(err)
+      })
   }
 
   
@@ -167,6 +173,7 @@ console.log(xhr.response);
       check={this.Getiterator}
       start={this.start}
       stop={this.stop}
+      status={this.state.status}
       />.
       </div>
     );

@@ -59,6 +59,7 @@ a:hover {
 .element{
   margin: 50px;
 }
+
 .FloatingAction{
   display: flex;
   flex-direction:row;

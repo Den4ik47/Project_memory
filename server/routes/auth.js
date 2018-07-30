@@ -179,20 +179,11 @@ var today = new Date();
       const saltRounds = 10;
 const salt = bcrypt.genSaltSync(saltRounds);
 const userHash = bcrypt.hashSync(rows[0].username, salt);
-req.session.username=userHash;
-req.session.save(function(err) {
-  if(err){
-      var data = 'Error saving session';
-      res.json(data);
-  }else{
-    var data = 'Session saved successfully';
-      res.json(data);
-  }});
       // all is well, return successful user
       return res.json({
         success: true,
         message: 'You have successfully logged in!',
-        token:req.session.username
+        token:userHash
       });
       
   });      
