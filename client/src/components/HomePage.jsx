@@ -63,7 +63,6 @@ Start
     Stop
       </FloatingActionButton>
 </div>
-</div>
 );
 
 HomePage.propTypes = {
