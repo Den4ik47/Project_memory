@@ -55,7 +55,6 @@ containerElement="label" primary/>
                 
                 ]}
             </div>; })}</div>}))}
-</Card >
 <div className="FloatingAction">
 <FloatingActionButton className="element" onClick={start}>
 Start
